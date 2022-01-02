@@ -1,5 +1,5 @@
 # Hobo.Ansible.AwsCli
-Ansible role to install the Amazon AWS CLI v2 on linux x64 platforms
+Ansible role to install the Amazon AWS CLI v2 on linux platforms
 
 ## Install Role
 From inside your playbook roles directory:
