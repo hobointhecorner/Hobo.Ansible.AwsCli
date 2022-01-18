@@ -1,0 +1,13 @@
+{% for profile in awscli_profiles %}
+{% if (profile.name|lower) == 'default' %}
+[default]
+{% else %}
+[profile {{ profile.name }}]
+{% endif %}
+{% for name, value in profile.items() %}
+{% if not (name|lower) in ['name', 'aws_access_key_id', 'aws_secret_access_key'] %}
+{{ name|lower }} = {{ value }}
+{% endif %}
+{% endfor %}
+
+{% endfor %}
