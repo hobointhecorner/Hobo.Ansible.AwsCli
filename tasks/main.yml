@@ -26,7 +26,7 @@
       become: true
       command:
       args:
-        cmd: "{{ (awscli_temp_dest, 'install')|path_join }}"
+        cmd: "{{ awscli_temp_dest }}/install"
         creates: /usr/local/bin/aws
 
     - name: Clean up
