@@ -14,30 +14,29 @@
 
 - when: aws_location.changed
   block:
-    - name: Download awscliv2 installer
+    - name: Download awscli installer
       unarchive:
         src: "{{ awscli_package_url }}"
-        dest: "{{ awscli_temp_dir }}"
+        dest: "{{ awscli_temp_dir|default('/tmp', true) }}"
         remote_src: yes
         creates: "{{ awscli_temp_dest }}"
         mode: 0755
 
-    - name: Run the installer
+    - name: Run awscli installer
       become: true
       command:
       args:
         cmd: "{{ awscli_temp_dest }}/install"
         creates: /usr/local/bin/aws
 
-    - name: Clean up
-      become: true
+    - name: Clean up awscli installer
       file:
         path: "{{ item }}"
         state: absent
       loop:
         - "{{ awscli_temp_dest }}"
 
-- name: Ensure .aws directory
+- name: Ensure awscli config directory
   file:
     path: "{{ awscli_config_dir }}"
     state: directory
