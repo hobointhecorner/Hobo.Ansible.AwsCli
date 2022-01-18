@@ -14,7 +14,7 @@ From inside your playbook roles directory:
 | Name            | Type      | Required | Default | Desctiption |
 |-----------------|-----------|----------|---------|-------------|
 | awscli_temp_dir | string    | No       | /tmp    | Temporary working directory for the playbook |
-| awscli_profiles | list(map) | No       |         | List of awscli configuration profiles with `name` and `region` required at minimum. [Available parameters](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html) |
+| awscli_profiles | list(map) | No       |         | List of awscli configuration profiles with `name` and `region` required at minimum. [More info](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html) |
 
 ## Example
 ```yaml
