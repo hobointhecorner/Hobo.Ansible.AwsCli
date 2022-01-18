@@ -1,8 +1,8 @@
 ---
 - name: Set awscli facts
   set_fact:
-    awscli_package_url: https://awscli.amazonaws.com/awscli-exe-{{ ansible_facts['system']|lower }}-{{ ansible_facts['machine'] }}.zip
-    awscli_temp_dest: "{{ (awscli_temp_dir, 'aws')|path_join }}"
+    awscli_package_url: https://awscli.amazonaws.com/awscli-exe-{{ ansible_facts.system|lower }}-{{ ansible_facts.machine }}.zip
+    awscli_temp_dest: "{{ awscli_temp_dir|default('/tmp', true) }}/aws"
     awscli_config_dir: "{{ ansible_env.HOME }}/.aws"
 
 - name: Test awscli installed
@@ -14,7 +14,6 @@
 
 - when: aws_location.changed
   block:
-
     - name: Download awscliv2 installer
       unarchive:
         src: "{{ awscli_package_url }}"
