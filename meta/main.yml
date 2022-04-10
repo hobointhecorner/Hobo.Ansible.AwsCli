@@ -1,0 +1,10 @@
+---
+galaxy_info:
+  role_name: hobo.ansible.awscli
+  author: hobointhecorner
+  description: Install and configure awscliv2
+  license: MPL-2.0
+
+  galaxy_tags: []
+
+dependencies: []
