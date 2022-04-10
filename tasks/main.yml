@@ -3,7 +3,6 @@
   set_fact:
     awscli_package_url: https://awscli.amazonaws.com/awscli-exe-{{ ansible_facts.system|lower }}-{{ ansible_facts.machine }}.zip
     awscli_temp_dest: "{{ awscli_temp_dir|default('/tmp', true) }}/aws"
-    awscli_config_dir: "{{ ansible_env.HOME }}/.aws"
 
 - name: Test awscli installed
   command:
@@ -40,8 +39,8 @@
   file:
     path: "{{ awscli_config_dir }}"
     state: directory
-    owner: "{{ ansible_env.USER }}"
-    group: "{{ ansible_env.USER }}"
+    owner: "{{ awscli_user }}"
+    group: "{{ awscli_user }}"
     mode: "700"
 
 - name: Template awscli config files
@@ -49,8 +48,8 @@
   template:
     src: templates/{{ item }}.j2
     dest: "{{ awscli_config_dir }}/{{ item }}"
-    owner: "{{ ansible_env.USER }}"
-    group: "{{ ansible_env.USER }}"
+    owner: "{{ awscli_user }}"
+    group: "{{ awscli_user }}"
     mode: "600"
   loop:
     - config
