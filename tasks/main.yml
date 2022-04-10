@@ -3,7 +3,6 @@
   set_fact:
     awscli_package_url: https://awscli.amazonaws.com/awscli-exe-{{ ansible_facts.system|lower }}-{{ ansible_facts.machine }}.zip
     awscli_temp_dest: "{{ awscli_temp_dir|default('/tmp', true) }}/aws"
-    awscli_config_dir: "{{ ansible_env.HOME }}/.aws"
 
 - name: Test awscli installed
   command:
