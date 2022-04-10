@@ -39,8 +39,8 @@
   file:
     path: "{{ awscli_config_dir }}"
     state: directory
-    owner: "{{ ansible_env.USER }}"
-    group: "{{ ansible_env.USER }}"
+    owner: "{{ awscli_user }}"
+    group: "{{ awscli_user }}"
     mode: "700"
 
 - name: Template awscli config files
@@ -48,8 +48,8 @@
   template:
     src: templates/{{ item }}.j2
     dest: "{{ awscli_config_dir }}/{{ item }}"
-    owner: "{{ ansible_env.USER }}"
-    group: "{{ ansible_env.USER }}"
+    owner: "{{ awscli_user }}"
+    group: "{{ awscli_user }}"
     mode: "600"
   loop:
     - config
