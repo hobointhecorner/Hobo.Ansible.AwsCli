@@ -1,4 +1,2 @@
 ---
-awscli_config_dir: "{{ ansible_env.HOME }}/.aws"
 awscli_temp_dir: /tmp
-awscli_user: "{{ ansible_env.USER }}"

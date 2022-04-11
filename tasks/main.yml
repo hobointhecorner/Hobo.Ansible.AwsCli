@@ -40,27 +40,3 @@
         state: absent
       loop:
         - "{{ awscli_temp_dest }}"
-
-- name: Ensure awscli config directory
-  tags:
-    - awscli
-  file:
-    path: "{{ awscli_config_dir }}"
-    state: directory
-    owner: "{{ awscli_user }}"
-    group: "{{ awscli_user }}"
-    mode: "700"
-
-- name: Template awscli config files
-  when: awscli_profiles is defined
-  tags:
-    - awscli
-  template:
-    src: templates/{{ item }}.j2
-    dest: "{{ awscli_config_dir }}/{{ item }}"
-    owner: "{{ awscli_user }}"
-    group: "{{ awscli_user }}"
-    mode: "600"
-  loop:
-    - config
-    - credentials
