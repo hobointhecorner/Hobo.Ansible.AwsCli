@@ -1,10 +1,14 @@
 ---
 - name: Set awscli facts
+  tags:
+    - awscli
   set_fact:
     awscli_package_url: https://awscli.amazonaws.com/awscli-exe-{{ ansible_facts.system|lower }}-{{ ansible_facts.machine }}.zip
     awscli_temp_dest: "{{ awscli_temp_dir|default('/tmp', true) }}/aws"
 
 - name: Test awscli installed
+  tags:
+    - awscli
   command:
     cmd: which aws
   register: aws_location
@@ -12,6 +16,8 @@
   failed_when: False
 
 - when: aws_location.changed
+  tags:
+    - awscli
   block:
     - name: Download awscli installer
       unarchive:
@@ -34,23 +40,3 @@
         state: absent
       loop:
         - "{{ awscli_temp_dest }}"
-
-- name: Ensure awscli config directory
-  file:
-    path: "{{ awscli_config_dir }}"
-    state: directory
-    owner: "{{ awscli_user }}"
-    group: "{{ awscli_user }}"
-    mode: "700"
-
-- name: Template awscli config files
-  when: awscli_profiles is defined
-  template:
-    src: templates/{{ item }}.j2
-    dest: "{{ awscli_config_dir }}/{{ item }}"
-    owner: "{{ awscli_user }}"
-    group: "{{ awscli_user }}"
-    mode: "600"
-  loop:
-    - config
-    - credentials
