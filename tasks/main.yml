@@ -25,7 +25,7 @@
         dest: "{{ awscli_temp_dir|default('/tmp', true) }}"
         remote_src: yes
         creates: "{{ awscli_temp_dest }}"
-        mode: 0755
+        mode: "755"
 
     - name: Run awscli installer
       become: true
